@@ -1,0 +1,49 @@
+﻿﻿<?xml version="1.0" encoding="utf-8"?>
+
+<namespace name="Generated.ItemsDb.Item">
+    <class file="item.cs" name="Item">
+        <object name="ItemId" type="System.Int32" then="Generated.ItemsDb.Enums.ItemId" />
+        <object name="EditableType" type="System.Byte" />
+        <object name="ItemCategory" type="System.Byte" />
+        <object name="ActionType" type="System.Byte" />
+        <object name="HitSoundType" type="System.Byte" />
+        <object name="Name" type="System.String" encrypted="True" />
+        <object name="Texture" type="System.String" />
+        <object name="TextureHash" type="System.Int32" />
+        <object name="ItemKind" type="System.Byte" />
+        <object name="Val1" type="System.Int32" />
+        <object name="TextureX" type="System.Byte" />
+        <object name="TextureY" type="System.Byte" />
+        <object name="SpreadType" type="System.Byte" />
+        <object name="IsStripyWallpaper" type="System.Byte" />
+        <object name="CollisionType" type="System.Byte" />
+        <object name="BreakHits" type="System.Byte" />
+        <object name="DropChance" type="System.Int32" />
+        <object name="ClothingType" type="System.Byte" />
+        <object name="Rarity" type="System.UInt16" />
+        <object name="MaxAmount" type="System.Byte" />
+        <object name="ExtraFile" type="System.String" />
+        <object name="ExtraFileHash" type="System.Int32" />
+        <object name="AudioVolume" type="System.Int32" />
+        <object name="PetName" type="System.String" />
+        <object name="PetPrefix" type="System.String" />
+        <object name="PetSuffix" type="System.String" />
+        <object name="PetAbility" type="System.String" />
+        <object name="SeedBase" type="System.Byte" />
+        <object name="SeedOverlay" type="System.Byte" />
+        <object name="TreeBase" type="System.Byte" />
+        <object name="TreeLeaves" type="System.Byte" />
+        <object name="SeedColor" type="System.Drawing.Color" />
+        <object name="SeedOverlayColor" type="System.Drawing.Color" />
+        <object name="GrowTime" type="System.TimeSpan" />
+        <object name="Val2" type="System.UInt16" />
+        <object name="IsRayman" type="System.UInt16" />
+        <object name="UnknownValue" type="System.Int32" write="False" />
+        <object name="ExtraOptions" type="System.String" />
+        <object name="Texture2" type="System.String" />
+        <object name="ExtraOptions2" type="System.String" />
+        <object name="UnknownBytes" type="System.Byte[]" count="80" />
+        <object name="ParticleInfoLength" type="System.UInt16" />
+        <object name="UnknownParticleBytes" type="System.Byte[]" count="0" />
+    </class>
+</namespace>

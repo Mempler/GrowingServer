@@ -1,0 +1,7 @@
+﻿﻿<?xml version="1.0" encoding="utf-8"?>
+
+<namespace name="Generated.ItemsDb.Enums">
+    <enum file="enums.cs" name="ItemId">
+        <enumGenerator from="Item.Name" value="Item.ItemId" />
+    </enum>
+</namespace>

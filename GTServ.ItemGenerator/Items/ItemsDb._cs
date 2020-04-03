@@ -1,0 +1,29 @@
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using GTServ.ItemGenerator.Items;
+
+namespace GTServ.ItemGenerator
+{
+    public class ItemsDb
+    {
+        public const ushort DbVersion = 10;
+
+        public readonly List<Item> Items
+            = new List<Item>();
+        
+        public byte[] Pack()
+        {
+            using var ms = new MemoryStream();
+
+            ms.Write(BitConverter.GetBytes(DbVersion));
+            ms.Write(BitConverter.GetBytes(Items.Count));
+            foreach (var item in Items)
+            {
+                ms.Write(item.Pack());
+            }
+
+            return ms.ToArray();
+        }
+    }
+}

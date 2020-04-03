@@ -1,0 +1,133 @@
+﻿using System;
+using System.Drawing;
+using System.IO;
+using System.Linq;
+using System.Text;
+
+namespace GTServ.ItemGenerator.Items
+{
+    public class Item
+    {
+        public int ItemId = 0;
+        public byte EditableType = 0;
+        public byte ItemCategory = 0;
+        public byte ActionType = 0;
+        public byte HitSoundType = 0;
+        public string Name = string.Empty;
+        public string Texture = string.Empty;
+        public int TextureHash = 0;
+        public byte ItemKind = 0;
+        public int Val1;
+        public byte TextureX = 0;
+        public byte TextureY = 0;
+        public byte SpreadType = 0;
+        public byte IsStripyWallpaper = 0;
+        public byte CollisionType = 0;
+        public byte BreakHits = 0;
+        public int DropChance = 0;
+        public byte ClothingType = 0;
+        public ushort Rarity = 0;
+        public byte MaxAmount = 0;
+        public string ExtraFile = string.Empty;
+        public int ExtraFileHash = 0;
+        public int AudioVolume = 0;
+        public string PetName = string.Empty;
+        public string PetPrefix = string.Empty;
+        public string PetSuffix = string.Empty;
+        public string PetAbility = string.Empty;
+        public byte SeedBase = 0;
+        public byte SeedOverlay = 0;
+        public byte TreeBase = 0;
+        public byte TreeLeaves = 0;
+        public Color SeedColor = Color.Black;
+        public Color SeedOverlayColor = Color.Black;
+        public TimeSpan GrowTime = TimeSpan.Zero;
+        public ushort Val2;
+        public ushort IsRayman = 0;
+        public string ExtraOptions = string.Empty;
+        public string Texture2 = string.Empty;
+        public string ExtraOptions2 = string.Empty;
+        public string UnknownBytes = string.Empty;
+
+        public byte[] EncryptName()
+        {
+            const string secret = "PBG892FXX982ABC*";
+
+            return Name.Select((t, i) =>
+                    (byte) (t ^ secret[(i + ItemId) % secret.Length])
+                ).ToArray();
+        }
+
+        public byte[] Pack()
+        {
+            using var ms = new MemoryStream();
+            
+            ms.Write(BitConverter.GetBytes(ItemId));
+            ms.Write(BitConverter.GetBytes(EditableType));
+            ms.Write(BitConverter.GetBytes(ItemCategory));
+            ms.Write(BitConverter.GetBytes(ActionType));
+            ms.Write(BitConverter.GetBytes(HitSoundType));
+            
+            var name = EncryptName();
+            ms.Write(BitConverter.GetBytes((ushort) name.Length));
+            ms.Write(name);
+            
+            ms.Write(BitConverter.GetBytes((ushort) Texture.Length));
+            ms.Write(Encoding.ASCII.GetBytes(Texture));
+            ms.Write(BitConverter.GetBytes(TextureHash));
+            
+            ms.Write(BitConverter.GetBytes(ItemKind));
+            ms.Write(BitConverter.GetBytes(Val1));
+            ms.Write(BitConverter.GetBytes(TextureX));
+            ms.Write(BitConverter.GetBytes(TextureY));
+            ms.Write(BitConverter.GetBytes(SpreadType));
+            ms.Write(BitConverter.GetBytes(IsStripyWallpaper));
+            ms.Write(BitConverter.GetBytes(CollisionType));
+            ms.Write(BitConverter.GetBytes(BreakHits));
+            ms.Write(BitConverter.GetBytes(DropChance));
+            ms.Write(BitConverter.GetBytes(ClothingType));
+            ms.Write(BitConverter.GetBytes(Rarity));
+            ms.Write(BitConverter.GetBytes(MaxAmount));
+            
+            ms.Write(BitConverter.GetBytes((ushort) ExtraFile.Length));
+            ms.Write(Encoding.ASCII.GetBytes(ExtraFile));
+            ms.Write(BitConverter.GetBytes(ExtraFileHash));
+            
+            ms.Write(BitConverter.GetBytes(AudioVolume));
+            
+            ms.Write(BitConverter.GetBytes((ushort) PetName.Length));
+            ms.Write(Encoding.ASCII.GetBytes(PetName));
+                        
+            ms.Write(BitConverter.GetBytes((ushort) PetPrefix.Length));
+            ms.Write(Encoding.ASCII.GetBytes(PetPrefix));
+            
+            ms.Write(BitConverter.GetBytes((ushort) PetSuffix.Length));
+            ms.Write(Encoding.ASCII.GetBytes(PetSuffix));
+            
+            ms.Write(BitConverter.GetBytes((ushort) PetAbility.Length));
+            ms.Write(Encoding.ASCII.GetBytes(PetAbility));
+            
+            ms.Write(BitConverter.GetBytes(SeedBase));
+            ms.Write(BitConverter.GetBytes(SeedOverlay));
+            ms.Write(BitConverter.GetBytes(TreeBase));
+            ms.Write(BitConverter.GetBytes(TreeLeaves));
+            ms.Write(BitConverter.GetBytes(SeedColor.ToArgb()));
+            ms.Write(BitConverter.GetBytes(SeedOverlayColor.ToArgb()));
+            ms.Write(BitConverter.GetBytes(0));
+            ms.Write(BitConverter.GetBytes(GrowTime.TotalSeconds));
+            ms.Write(BitConverter.GetBytes(Val2));
+            ms.Write(BitConverter.GetBytes(IsRayman));
+            
+            ms.Write(BitConverter.GetBytes((ushort) ExtraOptions.Length));
+            ms.Write(Encoding.ASCII.GetBytes(ExtraOptions));
+            
+            ms.Write(BitConverter.GetBytes((ushort) Texture2.Length));
+            ms.Write(Encoding.ASCII.GetBytes(Texture2));
+            
+            ms.Write(BitConverter.GetBytes((ushort) ExtraOptions2.Length));
+            ms.Write(Encoding.ASCII.GetBytes(ExtraOptions2));
+
+            return ms.ToArray();
+        }
+    }
+}
